@@ -49,3 +49,12 @@ To intentionally create a merge conflict, edit the same lines in one of:
 npm test
 npm run lint
 ```
+## Database Configuration
+
+The project uses an in-memory database module for this checkpoint.
+
+Optional environment variables:
+
+- `DB_URL` — connection URL, default: `memory://local`
+- `DB_POOL` — pool size, default: `4`
+- `DB_TIMEOUT` — timeout in milliseconds, default: `5000`
