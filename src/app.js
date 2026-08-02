@@ -2,13 +2,13 @@ const express = require("express");
 const path = require("path");
 const { router: apiRouter } = require("./routes/api");
 const { router: viewRouter } = require("./routes/views");
-
+const { router: authRouter } = require("./routes/auth");
 const app = express();
 
 // Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use("/api/auth", authRouter);
 // Static frontend
 app.use(express.static(path.join(__dirname, "..", "public")));
 
