@@ -14,7 +14,7 @@ This repository is a **starter template** for practicing:
 > "chore: remove sample conflict markers"`. See Walkthrough Step 2 for full
 > guidance.
 
-## Quick Start
+## Quick Start (Auth Branch Notes)
 
 ```bash
 # 1. Remove the sample conflict markers in src/app.js first (see note above)
