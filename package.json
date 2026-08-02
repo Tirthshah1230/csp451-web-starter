@@ -1,0 +1,17 @@
+{
+  "name": "csp451-web-starter",
+  "version": "1.0.0",
+  "description": "CSP-451 Week 2 CheckPoint 2 - Git branching & collaboration template",
+  "main": "src/app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "node src/tests/smoke.test.js",
+    "lint": "node src/tests/lint-lite.js",
+    "format:check": "node src/tests/format-lite.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
