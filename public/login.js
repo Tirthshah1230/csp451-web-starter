@@ -1,24 +1,94 @@
-/**
- * Starter login behavior (minimal).
- * Feature branch: feature/user-authentication should add:
- * - better validation (inline errors)
- * - UI feedback states (loading, success, failure)
- * - optional: call an API endpoint (e.g., POST /api/auth/login)
- */
 const form = document.getElementById("loginForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
 const message = document.getElementById("message");
+const loginButton = document.getElementById("loginButton");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+function isValidEmail(email) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+function clearErrors() {
+  emailError.textContent = "";
+  passwordError.textContent = "";
+  message.textContent = "";
+}
 
-  // Minimal checks (students can improve)
-  if (!email || password.length < 6) {
-    message.textContent = "Please enter a valid email and a password (min 6 characters).";
+function validateForm(email, password) {
+  let valid = true;
+
+  if (!email) {
+    emailError.textContent = "Email is required.";
+    valid = false;
+  } else if (!isValidEmail(email)) {
+    emailError.textContent = "Enter a valid email address.";
+    valid = false;
+  } else if (email.length > 150) {
+    emailError.textContent = "Email must be 150 characters or fewer.";
+    valid = false;
+  }
+
+  if (!password) {
+    passwordError.textContent = "Password is required.";
+    valid = false;
+  } else if (password.length < 6) {
+    passwordError.textContent =
+      "Password must contain at least 6 characters.";
+    valid = false;
+  } else if (password.length > 128) {
+    passwordError.textContent =
+      "Password must contain no more than 128 characters.";
+    valid = false;
+  }
+
+  return valid;
+}
+
+async function submitLogin(email, password) {
+  const response = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || "Login failed.");
+  }
+
+  return result;
+}
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  clearErrors();
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  if (!validateForm(email, password)) {
+    message.textContent = "Please correct the highlighted fields.";
     return;
   }
 
-  message.textContent = "Login submitted (stub). Implement authentication in your feature branch.";
+  loginButton.disabled = true;
+  loginButton.textContent = "Signing in...";
+  message.textContent = "Checking your credentials...";
+
+  try {
+    const result = await submitLogin(email, password);
+    message.textContent = result.message;
+    form.reset();
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    loginButton.disabled = false;
+    loginButton.textContent = "Sign in";
+  }
 });

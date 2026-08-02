@@ -8,3 +8,24 @@ button { padding: 10px 14px; border: 0; border-radius: 10px; cursor: pointer; }
 .muted { opacity: .75; }
 a { color: #0b57d0; text-decoration: none; }
 a:hover { text-decoration: underline; }
+.error-message {
+  min-height: 18px;
+  margin: 4px 0 10px;
+  color: #b42318;
+  font-size: 0.9rem;
+}
+
+input:focus {
+  outline: 2px solid #0b57d0;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#message {
+  min-height: 20px;
+  margin-top: 12px;
+}
