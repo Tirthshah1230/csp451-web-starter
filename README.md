@@ -13,12 +13,7 @@ This repository is a **starter template** for practicing:
 > the resolution you want to keep, then `git add src/app.js && git commit -m
 > "chore: remove sample conflict markers"`. See Walkthrough Step 2 for full
 > guidance.
-<<<<<<< HEAD
-=======
-
-## Quick Start (Auth Branch Notes)
-
->>>>>>> origin/main
+## Quick Start (Authentication and API Features)
 ```bash
 # 1. Remove the sample conflict markers in src/app.js first (see note above)
 npm install
