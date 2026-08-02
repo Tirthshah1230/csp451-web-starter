@@ -40,7 +40,7 @@ function validateForm(email, password) {
     valid = false;
   } else if (password.length > 128) {
     passwordError.textContent =
-      "Password must contain no more than 128 characters.";
+      "Password must contain no more than 128 character.";
     valid = false;
   }
 
